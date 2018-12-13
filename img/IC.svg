@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="15px" height="16px" viewBox="0 0 15 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>IC@2x</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Provider-chosen-hover-Copy" transform="translate(-162.000000, -177.000000)" fill="#B9C6CE">
+            <path d="M169.5,185.181521 C171.759531,185.181521 173.59076,183.350271 173.59076,181.09076 C173.59076,178.831249 171.759511,177 169.5,177 C167.240489,177 165.40924,178.831249 165.40924,181.09076 C165.40924,183.350271 167.240489,185.181521 169.5,185.181521 Z M162,192.340351 C162,192.528911 162.152604,192.681521 162.341169,192.681521 L176.658831,192.681521 C176.84739,192.681521 177,192.528917 177,192.340351 L177,191.658831 C177,188.90084 175.155967,186.54538 171.54538,186.54538 L167.45462,186.54538 C163.844115,186.54538 162,188.90084 162,191.658831 L162,192.340351 Z" id="IC"></path>
+        </g>
+    </g>
+</svg>

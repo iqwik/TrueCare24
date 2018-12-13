@@ -1,0 +1,55 @@
+@font-face {
+    font-family: "Lato";
+    src: url("../css/fonts/Lato-Black.eot"); /* IE9 Compat Modes */
+    src: url("../css/fonts/Lato-Black.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
+    url("../css/fonts/Lato-Black.otf") format("opentype"), /* Open Type Font */
+    url("../css/fonts/Lato-Black.svg") format("svg"), /* Legacy iOS */
+    url("../css/fonts/Lato-Black.ttf") format("truetype"), /* Safari, Android, iOS */
+    url("../css/fonts/Lato-Black.woff") format("woff"); /* Modern Browsers */
+    font-weight: 900;
+    font-style: normal;
+}
+@font-face {
+    font-family: "Lato";
+    src: url("../css/fonts/Lato-Black.eot"); /* IE9 Compat Modes */
+    src: url("../css/fonts/Lato-Black.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
+    url("../css/fonts/Lato-Black.otf") format("opentype"), /* Open Type Font */
+    url("../css/fonts/Lato-Black.svg") format("svg"), /* Legacy iOS */
+    url("../css/fonts/Lato-Black.ttf") format("truetype"), /* Safari, Android, iOS */
+    url("../css/fonts/Lato-Black.woff") format("woff"); /* Modern Browsers */
+    font-weight: 700;
+    font-style: normal;
+}
+@font-face {
+    font-family: "Lato";
+    src: url("../css/fonts/Lato-Regular.eot"); /* IE9 Compat Modes */
+    src: url("../css/fonts/Lato-Regular.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
+    url("../css/fonts/Lato-Regular.otf") format("opentype"), /* Open Type Font */
+    url("../css/fonts/Lato-Regular.svg") format("svg"), /* Legacy iOS */
+    url("../css/fonts/Lato-Regular.ttf") format("truetype"), /* Safari, Android, iOS */
+    url("../css/fonts/Lato-Regular.woff") format("woff"); /* Modern Browsers */
+    font-weight: 500;
+    font-style: normal;
+}
+@font-face {
+    font-family: "Lato";
+    src: url("../css/fonts/Lato-Light.eot"); /* IE9 Compat Modes */
+    src: url("../css/fonts/Lato-Light.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
+    url("../css/fonts/Lato-Light.otf") format("opentype"), /* Open Type Font */
+    url("../css/fonts/Lato-Light.svg") format("svg"), /* Legacy iOS */
+    url("../css/fonts/Lato-Light.ttf") format("truetype"), /* Safari, Android, iOS */
+    url("../css/fonts/Lato-Light.woff") format("woff"); /* Modern Browsers */
+    font-weight: 400;
+    font-style: normal;
+}
+@font-face {
+    font-family: "Lato";
+    src: url("../css/fonts/Lato-Hairline.eot"); /* IE9 Compat Modes */
+    src: url("../css/fonts/Lato-Hairline.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
+    url("../css/fonts/Lato-Hairline.otf") format("opentype"), /* Open Type Font */
+    url("../css/fonts/Lato-Hairline.svg") format("svg"), /* Legacy iOS */
+    url("../css/fonts/Lato-Hairline.ttf") format("truetype"), /* Safari, Android, iOS */
+    url("../css/fonts/Lato-Hairline.woff") format("woff"); /* Modern Browsers */
+    font-weight: 200;
+    font-style: normal;
+}

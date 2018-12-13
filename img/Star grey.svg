@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="21px" height="20px" viewBox="0 0 21 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>Star grey</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Provider-chosen-4" transform="translate(-646.000000, -117.000000)" fill="#D9E2EA">
+            <g id="Provide-feedback" transform="translate(510.000000, 40.000000)">
+                <path d="M152.545674,96.9982974 L146.616153,94.1371414 C146.455864,94.0588235 146.270201,94.0588235 146.109508,94.1371414 L140.18039,96.9982974 L140.935525,90.1863454 C140.955662,90.0020431 140.899279,89.8173151 140.779665,89.6811101 L136.363636,84.6415255 L142.757112,83.2913935 C142.93029,83.2547885 143.079706,83.1402911 143.164683,82.9789734 L146.364442,77 L149.562589,82.9789734 C149.649178,83.1402911 149.796983,83.2547885 149.970161,83.2913935 L156.363636,84.6432281 L151.944385,89.6828126 C151.825175,89.8190176 151.768389,90.0037456 151.788928,90.188048 L152.544063,97 L152.545674,96.9982974 Z" id="Star-grey"></path>
+            </g>
+        </g>
+    </g>
+</svg>

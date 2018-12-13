@@ -1,0 +1,7 @@
+[
+  {"flag": true, "type": "person", "name": "Lucile Munoz", "email": "oceane.torp@brennan.us", "phone": "+1 (727) 809-1539", "id": 7543, "status": {"selected": 0, "array": ["Contacting","Talked to the client","Assessment scheduled","Contract signed","Cancel the client"]}},
+  {"flag": true, "type": "person", "name": "Winifred Henderson", "email": "landen_deckow@hotmail.com", "phone": "+1 (532) 831-5321", "id": 9755, "status": {"selected": 1, "array": ["Contacting","Talked to the client","Assessment scheduled","Contract signed","Cancel the client"]}},
+  {"flag": false, "type": "person", "name": "Birdie Carson", "email": "dietrich_amiya@yahoo.com", "phone": "+1 (673) 223-7397", "id": 3421, "status": {"selected": 2, "array": ["Contacting","Talked to the client","Assessment scheduled","Contract signed","Cancel the client"]}},
+  {"flag": false, "type": "agency", "name": "Family Care SF, Inc.", "email": "dorothy.lesch@dickinson.me", "phone": "+1 (866) 124-5438", "id": 7675, "status": {"selected": 3, "array": ["Contacting","Talked to the client","Assessment scheduled","Contract signed","Cancel the client"]}},
+  {"flag": true, "type": "person", "name": "Barry Alexander", "email": "reilly.julius@gmail.com", "phone": "+1 (885) 163-9766", "id": 5553, "status": {"selected": 4, "array": ["Contacting","Talked to the client","Assessment scheduled","Contract signed","Cancel the client"]}}
+]
