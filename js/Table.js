@@ -2,6 +2,7 @@ class Table {
     constructor(container, source) {
         this.container = container;
         this.source = source;
+        this.users = [];
         this._init();
     }
     _init(){
@@ -10,20 +11,25 @@ class Table {
             .then(data => {
                 data.forEach(user => {
                     this._renderUser(user);
+                    this.users.push(user);
                 });
             });
     }
     _renderUser(user){
+        // <tr class="data-users-tr"></tr>  --tr
         let trClass = "data-users-tr";
-        if (user.status === 4) trClass = "data-users-tr cancel";
-
+        if (user.status.selected === 4) trClass = "data-users-tr cancel";
         let $tr = $('<tr/>', {
             class: trClass,
             "data-id": user.id
         });
-
+        // <td>Type</td>  --type
         let $tdType = $('<td/>', {
-            class: "type-contract __flex __align-items_center __justify-content_space-between"
+            class: "type-contract",
+            "data-label": "Type"
+        });
+        let $divType = $('<div/>', {
+            class: "__flex __align-items_center __justify-content_space-between"
         });
         let srcFlag = 'img/Non%20Contracted.png';
         if (user.flag === true) srcFlag = 'img/Contracted.png';
@@ -32,44 +38,57 @@ class Table {
             class: "contract",
             alt: ""
         });
-        $imgFlag.appendTo($tdType);
         let srcImg = 'img/IC.png';
         if (user.type === 'agency') srcImg = 'img/Home%20care%20agency.png';
         let $imgType = $('<img/>', {
             src: srcImg,
             alt: ""
         });
-        $imgType.appendTo($tdType);
-
+        $imgFlag.appendTo($divType);
+        $imgType.appendTo($divType);
+        $divType.appendTo($tdType);
+        // <td >
         let $tdName = $('<td/>', {
             class: "user-name",
-            text: user.name
+            text: user.name,
+            "data-label": "Name"
         });
+        // <td>Email</td>  --Email
         let $tdEmail = $('<td/>', {
-            text: user.email
+            text: user.email,
+            "data-label": "Email"
         });
+        // <td>Phone</td>  --Phone
         let $tdPhone = $('<td/>', {
-            text: user.phone
+            text: user.phone,
+            "data-label": "Phone"
         });
+        // <td>ID</td>  --ID
         let $tdID = $('<td/>', {
-            text: user.id
+            text: user.id,
+            "data-label": "ID"
         });
-        let $tdStatus = $('<td/>');
+        // <td>Status</td>  --Status
+        let $tdStatus = $('<td/>', {
+            "data-label": "Status"
+        });
         let $aStatus = $('<a/>', {
-            class: `user-status _status-${user.status.selected}`,
-            href: "#",
-            text: user.status.array[user.status.selected]
+            class: `user-status _status-list-${user.status.selected}`,
+            "data-id": user.id,
+            "data-status": user.status.selected,
+            href: "#"
         });
-        this._statusList(user.status.array).appendTo($aStatus);
+        $aStatus.append(`<span class="user-status-span">${user.status.array[user.status.selected]}</span>`);
+        // create list
+        this._createList(user.status.array, 'status-list', user.status.selected).appendTo($aStatus);
         $aStatus.appendTo($tdStatus);
-        $aStatus.click(e => {
-            e.preventDefault();
-            if($('.status-list').hasClass('active')){
-                $('.status-list').removeClass('active');
-            }
-            $(e.target).find('.status-list').addClass('active');
+        // show list on click
+        this._showListOnClick($aStatus, '.status-list', 'active', true);
+
+        // <td></td>  --Buttons (CHAT, CALL, Kebab Menu)
+        let $tdBtns = $('<td/>', {
+            class: "td-buttons"
         });
-        let $tdBtns = $('<td/>');
         let $divBtns = $('<div/>', {
             class: "user-buttons __flex __align-items_center __justify-content_space-between"
         });
@@ -85,7 +104,15 @@ class Table {
         });
         $btnChat.appendTo($divBtns);
         $btnCall.appendTo($divBtns);
-        $divBtns.append('<a href="#"><img src="img/kebab%20menu%20hover.png" alt=""></a>');
+        let $kebabMenu = $('<a/>', {
+            class: "kebab-menu",
+            href: "#"
+        });
+        // create list
+        this._createList(["Send info","Provide feedback", "Send reminder", "Background check"], 'kebab-menu-list').appendTo($kebabMenu);
+        $kebabMenu.appendTo($divBtns);
+        // show list on click
+        this._showListOnClick($kebabMenu, '.kebab-menu-list', 'active');
         $divBtns.appendTo($tdBtns);
         $tdType.appendTo($tr);
         $tdName.appendTo($tr);
@@ -94,15 +121,54 @@ class Table {
         $tdID.appendTo($tr);
         $tdStatus.appendTo($tr);
         $tdBtns.appendTo($tr);
+        // appended it all to main container in <tbody>
         $tr.appendTo($(this.container));
     }
-    _statusList(array){
+    _createList(array, ulClass, selected = -1){
         let $ul = $('<ul/>', {
-            class: "status-list"
+            class: ulClass
         });
+        if(selected > -1) $ul.append(`<li class="${ulClass}-li _${ulClass}-${selected}" data-val="${selected}">${array[selected]}</li>`);
         array.forEach((status, index) => {
-            $ul.append(`<li class="status-list-li _status-${index}">${status}</li>`);
+            if(index !== selected) {
+                $ul.append(`<li class="${ulClass}-li _${ulClass}-${index}" data-val="${index}">${status}</li>`);
+            }
         });
         return $ul;
+    }
+    _showListOnClick(element, listClass, addClass, changeStatus = false){
+        element.click(e => {
+            e.preventDefault();
+            if(changeStatus){
+                if(e.target.tagName === 'LI') {
+                    let dataID = $(e.target).parent().siblings('span').parent().data('id');
+                    let dataStatus = $(e.target).parent().siblings('span').parent().data('status');
+                    this._changeStatus(e.target, dataID, dataStatus);
+                }
+            }
+            $(this.container).find(`.${addClass}`).removeClass(addClass);
+            $(e.target).parent().find(listClass).addClass(addClass);
+        });
+    }
+    _changeStatus(target, id, status){
+        let find = this.users.find(user => user.id === id);
+        $(`.user-status[data-id="${id}"]`)
+            .removeClass(`${$(target).closest('.status-list').parent().attr('class')}`)
+            .addClass('user-status')
+            .addClass(`_status-list-${$(target).data('val')}`)
+            .attr('data-status', $(target).data('val'))
+            .find('span').text($(target).text());
+        find.status.selected = $(target).data('val');
+        if($(target).data('val') === 4) {
+            $(`.data-users-tr[data-id="${id}"]`).addClass('cancel');
+        } else {
+            $(`.data-users-tr[data-id="${id}"]`).removeClass('cancel');
+        }
+        this._refreshSortList(find.status.array, find.status.selected, `.user-status[data-id="${id}"]`);
+    }
+    _refreshSortList(array, selected, parent){
+        $(parent).find('.status-list').remove();
+        this._createList(array, 'status-list', selected).appendTo($(parent));
+        $(parent).appendTo($(parent).parent());
     }
 }

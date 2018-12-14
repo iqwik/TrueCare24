@@ -1,0 +1,119 @@
+@media (max-width: 1250px) {
+    thead th, tbody td {
+        padding: 0 10px;
+        font-size: 13px;
+    }
+}
+@media (max-width: 1120px) {
+    thead th, tbody td {
+        padding: 0;
+        font-size: 12px;
+    }
+}
+@media (max-width: 991px) {
+    thead {
+        display: none;
+    }
+    tbody tr {
+        display: block;
+        height: 100%;
+        border-bottom: 1px solid #ccc;
+    }
+    tbody td, td.type-contract {
+        display: flex;
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        justify-content: space-between;
+        -webkit-box-pack: justify;
+        -webkit-justify-content: space-between;
+        -ms-flex-pack: justify;
+        align-items: center;
+        -webkit-box-align: center;
+        -webkit-align-items: center;
+        -ms-flex-align: center;
+        width:100%;
+        height: 50px;
+        padding: 0 20px;
+        box-sizing: border-box;
+    }
+    tbody td:nth-child(2n) {
+        background-color: rgba(193, 190, 190, 0.25);
+    }
+    tbody td:before {
+        content: attr(data-label);
+        padding: 5px;
+        border-radius: 4px;
+        font-weigth:500;
+    }
+    .status-list {
+        left: -67px;
+    }
+}
+@media (max-width: 767px) {
+    .aside {
+        transform: scaleX(0);
+        width:100%;
+    }
+    .aside.show {
+        transform: scaleX(1);
+        z-index: 50;
+    }
+    .aside .search {
+        margin-bottom: 35px;
+    }
+    .aside .login {
+        text-align:center;
+    }
+    .aside .login .login-a {
+        color: #fff;
+    }
+    .main-logo {
+        margin: 80px 18px 40px 18px;
+        text-align: center;
+    }
+    .main {
+        margin-left: 0;
+    }
+    .burger {
+        position: relative;
+        display: flex;
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        flex-direction: column;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+        justify-content: center;
+        -webkit-box-pack: center;
+        -webkit-justify-content: center;
+        -ms-flex-pack: center;
+        width: 50px;
+        height: 30px;
+        z-index: 51;
+    }
+    .line {
+        display: block;
+        width: 100%;
+        height: 5px;
+        background: #54d0ff;
+        margin-bottom: 5px;
+    }
+    .active .line {
+        position: absolute;
+    }
+    .active .line:nth-child(1) {
+        transform: rotate(40deg);
+    }
+    .active .line:nth-child(2) {
+        transform: scale(0);
+    }
+    .active .line:nth-child(3) {
+        transform: rotate(-40deg);
+    }
+    .left-side, .right-side {
+        display: none;
+    }
+}

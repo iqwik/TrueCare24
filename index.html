@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="css/normalize.css" />
     <link rel="stylesheet" href="css/fonts.css" />
     <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/media.css" />
 </head>
 <body>
     <div class="aside __flex __flex-direction_column">
@@ -35,6 +36,11 @@
     </div>
     <div class="main">
         <div class="header __flex __align-items_center __justify-content_space-between">
+            <a href="#" class="burger">
+                <span class="line"></span>
+                <span class="line"></span>
+                <span class="line"></span>
+            </a>
             <div class="left-side __flex __align-items_center">
                 <a href="#" class="back-link">
                     <img class="left-arrow-img" src="img/Back%201.png" alt="left arrow" width="13" height="13">
@@ -62,13 +68,13 @@
                 <table>
                     <thead>
                         <tr>
-                            <td>Type</td>
-                            <td>Name</td>
-                            <td>Email</td>
-                            <td>Phone</td>
-                            <td>ID</td>
-                            <td><span class="status-heading">Status</span></td>
-                            <td></td>
+                            <th>Type</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>ID</th>
+                            <th><span class="status-heading">Status</span></th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody class="data-users"></tbody>
@@ -78,10 +84,7 @@
     </div>
     <script src="js/jquery.min.js"></script>
     <script src="js/Table.js"></script>
-    <script>
-        $(document).ready(() => {
-            new Table('.data-users', 'js/users.json');
-        });
-    </script>
+    <script src="js/Modal.js"></script>
+    <script src="js/all.js"></script>
 </body>
 </html>
