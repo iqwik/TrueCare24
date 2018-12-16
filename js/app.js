@@ -29,6 +29,7 @@ $(document).ready(() => {
         $aside.find('form').remove();
         $aside.find('.fulfillments-kpi-a').remove();
         $aside.find('.login').remove();
+        window.scrollTo(0, $("#main-block").offset().top);
     };
     let addClass = () => {
         $body.addClass('overflow-hidden');
