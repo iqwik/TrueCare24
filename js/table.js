@@ -103,7 +103,8 @@ class Table {
             class: "btnCall",
             href: "#",
             text: "Call",
-            "data-user-phone": user.phone.replace( /[(]|[)]|[-]|\s/g, "")
+            "data-user-phone": user.phone.replace( /[(]|[)]|[-]|\s/g, ""),
+            "data-user-name": user.name
         });
         $btnChat.appendTo($divBtns);
         $btnCall.appendTo($divBtns);
@@ -180,14 +181,12 @@ class Table {
         element.click(e => {
             e.preventDefault();
 
-            console.log('Requesting Capability Token...');
             $.getJSON('./token.php')
                 .done((data) => {
                     console.log('Got a Token: ' + data.token);
 
                     // Setup Twilio.Device
                     Twilio.Device.setup(data.token);
-
                     Twilio.Device.ready((device) => {
                         console.log('Twilio.Device Ready!');
                         console.log(device);
@@ -199,12 +198,10 @@ class Table {
 
                     Twilio.Device.connect((conn) => {
                         console.log('Successfully established call!');
-                        element.text('Hangup');
                     });
 
                     Twilio.Device.disconnect((conn) => {
                         console.log('Call ended.');
-                        element.text('Call');
                     });
 
                     Twilio.Device.incoming((conn) => {
@@ -219,22 +216,28 @@ class Table {
                             conn.accept();
                         }
                     });
+                    //setClientNameUI(element.data('user-name'));
                 })
                 .fail(function () {
                     console.log('Could not get a token from server!');
                 });
 
-            //$(e.target).toggleClass('calling');
-            //
-            //if($(e.target).hasClass('calling')){
-            //    Twilio.Device.disconnectAll();
-            //} else {
+            if(element.hasClass('calling')){
+                Twilio.Device.disconnectAll();
+                element.removeClass('calling');
+                element.text('Call');
+            } else {
+                element.addClass('calling');
+                element.text('Hangup');
                 let params = {
-                    To: this.salesPhone
+                    To: this.salesPhone,
+                    _clientName: element.data('user-name')
                 };
                 console.log('Calling ' + params.To + '...');
+                console.log('User ' + params._clientName);
                 Twilio.Device.connect(params);
-            //}
+                console.log(Twilio.Device.connect);
+            }
             /*
 
             // Call our ajax endpoint on the server to initialize the phone call
