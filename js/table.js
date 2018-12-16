@@ -111,6 +111,7 @@ class Table {
             class: "kebab-menu",
             href: "#"
         });
+        // call event
         this._callTo($btnCall);
         // create list
         this._createList(["Send info","Provide feedback", "Send reminder", "Background check"], 'kebab-menu-list').appendTo($kebabMenu);
@@ -180,7 +181,7 @@ class Table {
             e.preventDefault();
 
             console.log('Requesting Capability Token...');
-            $.getJSON('./twilio/token.php')
+            $.getJSON('./token.php')
                 .done((data) => {
                     console.log('Got a Token: ' + data.token);
 
@@ -189,6 +190,7 @@ class Table {
 
                     Twilio.Device.ready((device) => {
                         console.log('Twilio.Device Ready!');
+                        console.log(device);
                     });
 
                     Twilio.Device.error((error) => {
@@ -222,11 +224,17 @@ class Table {
                     console.log('Could not get a token from server!');
                 });
 
-            let params = {
-                To: this.salesPhone
-            };
-            console.log('Calling ' + params.To + '...');
-            Twilio.Device.connect(params);
+            //$(e.target).toggleClass('calling');
+            //
+            //if($(e.target).hasClass('calling')){
+            //    Twilio.Device.disconnectAll();
+            //} else {
+                let params = {
+                    To: this.salesPhone
+                };
+                console.log('Calling ' + params.To + '...');
+                Twilio.Device.connect(params);
+            //}
             /*
 
             // Call our ajax endpoint on the server to initialize the phone call
@@ -246,7 +254,7 @@ class Table {
             });
             */
 
-            console.log(`we will call to ${element.data('user-phone')}... but now we're dialing test phone: ${this.salesPhone}`);
+            console.log(`we will call to ${element.data('user-phone')}... but now we're dialing test #: ${this.salesPhone}`);
         });
     }
 }
