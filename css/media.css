@@ -101,19 +101,34 @@
         background: #54d0ff;
         margin-bottom: 5px;
     }
-    .active .line {
+    .burger.active {
+        position: fixed;
+    }
+    .burger.active .line {
         position: absolute;
     }
-    .active .line:nth-child(1) {
+    .burger.active .line:nth-child(1) {
         transform: rotate(40deg);
     }
-    .active .line:nth-child(2) {
+    .burger.active .line:nth-child(2) {
         transform: scale(0);
     }
-    .active .line:nth-child(3) {
+    .burger.active .line:nth-child(3) {
         transform: rotate(-40deg);
     }
     .left-side, .right-side {
         display: none;
+    }
+}
+@media (max-width:480px) {
+    body {
+        background-color: #ebeff4;
+    }
+    img.contract {
+        margin-right: 10px;
+    }
+    .modal-feedback {
+        top: 0;
+        bottom:0;
     }
 }

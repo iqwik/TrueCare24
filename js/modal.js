@@ -25,6 +25,7 @@ class Modal {
                 e.preventDefault();
                 $modalWrapper.remove();
                 $modalOverlay.remove();
+                $(this.container).removeClass('overflow-hidden');
             });
             let $modalBody = $('<div/>', {
                 class: `${this.class}__body`
@@ -70,6 +71,8 @@ class Modal {
             $modalHeading.appendTo($modalWrapper);
             $modalBody.appendTo($modalWrapper);
             $modalWrapper.appendTo($(this.container));
+            window.scrollTo(0, $("#main-block").offset().top);
+            $(this.container).addClass('overflow-hidden');
         }
     }
 }

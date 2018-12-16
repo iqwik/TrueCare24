@@ -1,12 +1,12 @@
 $(document).ready(() => {
+    let $body = $('body');
     // user data table
     new Table('.data-users', 'js/users.json', '+12242680276', 'call.php');
     // feedback modal
-    $('body').on('click', '._kebab-menu-list-1', () => {
+    $body.on('click', '._kebab-menu-list-1', () => {
         new Modal('body','modal-feedback', '.burger', '.aside');
     });
     // burger menu
-    let $body = $('body');
     let $aside = $('.aside');
     let $burger = $('.burger');
     $(document).on('click', '.burger', e => {
