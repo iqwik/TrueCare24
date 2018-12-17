@@ -1,3 +1,9 @@
+<?php
+        $production = true;
+        if((!isset($_SERVER['HTTPS'])) && (!isset($_SERVER['HTTP_HTTPS'])) && ($_SERVER['HTTP_HTTPS'] != 'on') && ($production == false)){
+            header('Location: ' . strtolower('https://' . $_SERVER['HTTP_HOST']), TRUE, 301);
+        }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

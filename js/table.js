@@ -1,9 +1,7 @@
 class Table {
-    constructor(container, source, salesPhone, callSource) {
+    constructor(container, source) {
         this.container = container;
         this.source = source;
-        this.salesPhone = salesPhone;
-        this.callSource = callSource;
         this.users = [];
         this._init();
     }
@@ -180,84 +178,42 @@ class Table {
     _callTo(element){
         element.click(e => {
             e.preventDefault();
-
-            $.getJSON('./token.php')
-                .done((data) => {
-                    console.log('Got a Token: ' + data.token);
-
-                    // Setup Twilio.Device
-                    Twilio.Device.setup(data.token);
-                    Twilio.Device.ready((device) => {
-                        console.log('Twilio.Device Ready!');
-                        console.log(device);
-                    });
-
-                    Twilio.Device.error((error) => {
-                        console.log('Twilio.Device Error: ' + error.message);
-                    });
-
-                    Twilio.Device.connect((conn) => {
-                        console.log('Successfully established call!');
-                    });
-
-                    Twilio.Device.disconnect((conn) => {
-                        console.log('Call ended.');
-                    });
-
-                    Twilio.Device.incoming((conn) => {
-                        console.log('Incoming connection from ' + conn.parameters.From);
-                        let archEnemyPhoneNumber = '+12099517118';
-
-                        if (conn.parameters.From === archEnemyPhoneNumber) {
-                            conn.reject();
-                            console.log('It\'s your nemesis. Rejected call.');
-                        } else {
-                            // accept the incoming connection and start two-way audio
-                            conn.accept();
-                        }
-                    });
-                    //setClientNameUI(element.data('user-name'));
-                })
-                .fail(function () {
-                    console.log('Could not get a token from server!');
-                });
-
+            this._getJson();
             if(element.hasClass('calling')){
-                Twilio.Device.disconnectAll();
                 element.removeClass('calling');
                 element.text('Call');
+                Twilio.Device.disconnectAll();
             } else {
                 element.addClass('calling');
                 element.text('Hangup');
-                let params = {
-                    To: this.salesPhone,
-                    _clientName: element.data('user-name')
-                };
-                console.log('Calling ' + params.To + '...');
-                console.log('User ' + params._clientName);
+                let params = { To: '+12242680276' };
+                alert(`\nwe will call to #: ${element.data('user-phone')}...\n\nbut now we're calling to test #: +12242680276`);
                 Twilio.Device.connect(params);
-                console.log(Twilio.Device.connect);
             }
-            /*
-
-            // Call our ajax endpoint on the server to initialize the phone call
-            $.ajax({
-                url: this.callSource,
-                method: 'POST',
-                dataType: 'json',
-                data: {
-                    userPhone: element.data('user-phone'),
-                    salesPhone: this.salesPhone
-                }
-            }).done(function(data) {
-                // The JSON sent back from the server will contain a success message
-                alert(data.message);
-            }).fail(function(error) {
-                alert(JSON.stringify(error));
-            });
-            */
-
-            console.log(`we will call to ${element.data('user-phone')}... but now we're dialing test #: ${this.salesPhone}`);
         });
+    }
+    _getJson(){
+        $.getJSON('./token.php')
+            .done((data) => {
+                console.log('Got a Token: ' + data.token);
+                // Setup Twilio.Device
+                Twilio.Device.setup(data.token);
+                Twilio.Device.ready((device) => { console.log('Twilio.Device Ready!'); });
+                Twilio.Device.error((error) => { console.log('Twilio.Device Error: ' + error.message); });
+                Twilio.Device.connect((conn) => { console.log('Successfully established call!'); });
+                Twilio.Device.disconnect((conn) => { console.log('Call ended.'); });
+                Twilio.Device.incoming((conn) => {
+                    console.log('Incoming connection from ' + conn.parameters.From);
+                    let archEnemyPhoneNumber = '+12099517118';
+                    if (conn.parameters.From === archEnemyPhoneNumber) {
+                        conn.reject();
+                        console.log(`It"s your nemesis. Rejected call.`);
+                    } else {
+                        // accept the incoming connection and start two-way audio
+                        conn.accept();
+                    }
+                });
+            })
+            .fail(function () { alert('Could not get a token from server!'); });
     }
 }

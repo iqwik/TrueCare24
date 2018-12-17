@@ -1,7 +1,7 @@
 $(document).ready(() => {
     let $body = $('body');
     // user data table
-    new Table('.data-users', 'js/users.json', '+12242680276', 'call.php');
+    new Table('.data-users', 'js/users.json');
     // feedback modal
     $body.on('click', '._kebab-menu-list-1', () => {
         new Modal('body','modal-feedback', '.burger', '.aside');
