@@ -316,6 +316,9 @@ td.type-contract {
     width: 60px;
     height: 30px;
     line-height: 30px;
+    border: none;
+    outline: none;
+    cursor: pointer;
 }
 .btnChat {
     background-color: #54d0ff;
@@ -329,6 +332,12 @@ td.type-contract {
 }
 .btnCall:hover {
     background-color: #00b063;
+}
+.disable {
+    opacity: .5;
+}
+.disable:hover {
+    background-color: #29c581;
 }
 .kebab-menu {
     position: relative;

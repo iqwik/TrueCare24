@@ -1,7 +1,9 @@
 class Table {
-    constructor(container, source) {
+    constructor(container, source, btnCall, twilioSource) {
         this.container = container;
         this.source = source;
+        this.btnCall = btnCall;
+        this.twilioSource = twilioSource;
         this.users = [];
         this._init();
     }
@@ -10,12 +12,13 @@ class Table {
             .then(response => response.json())
             .then(data => {
                 data.forEach(user => {
-                    this._renderUser(user);
+                    this._renderUser(user, this.btnCall);
                     this.users.push(user);
                 });
             });
+        this._jsonTwilio(this.twilioSource, this.btnCall);
     }
-    _renderUser(user){
+    _renderUser(user, btnCall){
         // <tr class="data-users-tr"></tr>  --tr
         let trClass = "data-users-tr";
         if (user.status.selected === 4) trClass = "data-users-tr cancel";
@@ -92,14 +95,12 @@ class Table {
         let $divBtns = $('<div/>', {
             class: "user-buttons __flex __align-items_center __justify-content_space-between"
         });
-        let $btnChat = $('<a/>', {
+        let $btnChat = $('<button/>', {
             class: "btnChat",
-            href: "#",
             text: "Chat"
         });
-        let $btnCall = $('<a/>', {
-            class: "btnCall",
-            href: "#",
+        let $btnCall = $('<button/>', {
+            class: btnCall,
             text: "Call",
             "data-user-phone": user.phone.replace( /[(]|[)]|[-]|\s/g, ""),
             "data-user-name": user.name
@@ -111,7 +112,7 @@ class Table {
             href: "#"
         });
         // call event
-        this._callTo($btnCall);
+        this._callTo($btnCall, $btnCall.attr('class'));
         // create list
         this._createList(["Send info","Provide feedback", "Send reminder", "Background check"], 'kebab-menu-list').appendTo($kebabMenu);
         $kebabMenu.appendTo($divBtns);
@@ -175,25 +176,32 @@ class Table {
         this._createList(array, 'status-list', selected).appendTo($(parent));
         $(parent).appendTo($(parent).parent());
     }
-    _callTo(element){
+    _callTo(element, btnClass){
         element.click(e => {
             e.preventDefault();
-            this._getJson();
-            if(element.hasClass('calling')){
-                element.removeClass('calling');
+            let $btnCall = $(`.${btnClass}`);
+            $btnCall.addClass('disable');
+            element.removeClass('disable').toggleClass('calling');
+            if($btnCall.hasClass('disable')){
+                $btnCall.prop('disabled', true);
+            }
+            if(!element.hasClass('calling')){
                 element.text('Call');
+                $btnCall.removeClass('disable');
                 Twilio.Device.disconnectAll();
+                alert('Call ended.')
+                $btnCall.prop('disabled', false);
             } else {
-                element.addClass('calling');
                 element.text('Hangup');
                 let params = { To: '+12242680276' };
                 alert(`\nwe will call to #: ${element.data('user-phone')}...\n\nbut now we're calling to test #: +12242680276`);
                 Twilio.Device.connect(params);
+                element.prop('disabled', false);
             }
         });
     }
-    _getJson(){
-        $.getJSON('./token.php')
+    _jsonTwilio(source, element){
+        $.getJSON(source)
             .done((data) => {
                 console.log('Got a Token: ' + data.token);
                 // Setup Twilio.Device
@@ -201,7 +209,11 @@ class Table {
                 Twilio.Device.ready((device) => { console.log('Twilio.Device Ready!'); });
                 Twilio.Device.error((error) => { console.log('Twilio.Device Error: ' + error.message); });
                 Twilio.Device.connect((conn) => { console.log('Successfully established call!'); });
-                Twilio.Device.disconnect((conn) => { console.log('Call ended.'); });
+                Twilio.Device.disconnect((conn) => {
+                    console.log('Call ended.');
+                    $(`.${element}`).removeClass('calling').text('Call');
+                    $(`.${this.btnCall}`).removeClass('disable').prop('disabled', false);
+                });
                 Twilio.Device.incoming((conn) => {
                     console.log('Incoming connection from ' + conn.parameters.From);
                     let archEnemyPhoneNumber = '+12099517118';
