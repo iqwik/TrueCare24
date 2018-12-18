@@ -1,7 +1,7 @@
 <?php
 include('./twilio/vendor/autoload.php');
 include('./twilio/config.php');
-include('./twilio/randos.php');
+//include('./twilio/randos.php');
 
 use Twilio\Jwt\ClientToken;
 
