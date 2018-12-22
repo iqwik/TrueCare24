@@ -87,6 +87,10 @@
                     </thead>
                     <tbody class="data-users"></tbody>
                 </table>
+                <form id="callTo" style="display:none;">
+                    <input class="input-hidden _to" type="hidden" name="to" value="">
+                    <input class="input-hidden _from" type="hidden" name="from" value="">
+                </form>
             </div>
         </div>
     </div>

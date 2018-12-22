@@ -16,7 +16,7 @@ class Table {
                     this.users.push(user);
                 });
             });
-        this._jsonTwilio(this.twilioSource, this.btnCall);
+        //this._jsonTwilio(this.twilioSource, this.btnCall);
     }
     _renderUser(user, btnCall){
         // <tr class="data-users-tr"></tr>  --tr
@@ -179,6 +179,9 @@ class Table {
     _callTo(element, btnClass){
         element.click(e => {
             e.preventDefault();
+            let $form = $('#callTo');
+            $form.find('.input-hidden._to').val('+79636626266');
+            $form.find('.input-hidden._from').val('+12242680276');
             let $btnCall = $(`.${btnClass}`);
             $btnCall.addClass('disable');
             element.removeClass('disable').toggleClass('calling');
@@ -188,19 +191,29 @@ class Table {
             if(!element.hasClass('calling')){
                 element.text('Call');
                 $btnCall.removeClass('disable');
-                Twilio.Device.disconnectAll();
+                //Twilio.Device.disconnectAll();
                 alert('Call ended.')
                 $btnCall.prop('disabled', false);
             } else {
                 element.text('Hangup');
-                let params = { To: '+12242680276' };
+                //let params = { To: '+12242680276' };
                 alert(`\nwe will call to #: ${element.data('user-phone')}...\n\nbut now we're calling to test #: +12242680276`);
-                Twilio.Device.connect(params);
+                //Twilio.Device.connect(params);
+                let formData = $form.serialize();
+                console.log(formData);
+                $.ajax({
+                    url: this.twilioSource,
+                    type: 'POST',
+                    data: formData,
+                    success: data => {
+                        console.log(`success! your phone will dialing now... ${data}`);
+                    }
+                });
                 element.prop('disabled', false);
             }
         });
     }
-    _jsonTwilio(source, element){
+    /*_jsonTwilio(source, element){
         $.getJSON(source)
             .done((data) => {
                 console.log('Got a Token: ' + data.token);
@@ -227,5 +240,5 @@ class Table {
                 });
             })
             .fail(function () { alert('Could not get a token from server!'); });
-    }
+    }*/
 }
