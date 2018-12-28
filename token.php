@@ -1,21 +1,22 @@
 <?php
-include('./twilio/vendor/autoload.php');
-include('./twilio/config.php');
-//include('./twilio/randos.php');
+require_once './twilio/vendor/autoload.php';
+require_once './twilio/config.php';
 
-use Twilio\Jwt\ClientToken;
+use Twilio\Rest\Client;
+$client = new Client($sid, $token);
 
-// choose a random username for the connecting user
-//$identity = randomUsername();
-
-$capability = new ClientToken($TWILIO_ACCOUNT_SID, $TWILIO_AUTH_TOKEN);
-$capability->allowClientOutgoing($TWILIO_TWIML_APP_SID);
-//$capability->allowClientIncoming($identity);
-$token = $capability->generateToken();
-
-// return serialized token and the user's randomly generated ID
-header('Content-Type: application/json');
-echo json_encode(array(
-    //'identity' => $identity,
-    'token' => $token,
-));
+$to = $_POST['to'];
+$from = $_POST['from'];
+//if($to && $from){
+try {
+    $call = $client->account->calls->create(
+        $to,
+        $from,
+        array("url" => "https://care24.iqwik.ru/call_to_client.xml")
+    );
+    echo "Started call: " . $call->sid;
+    print_r($call);
+} catch (Exception $e) {
+    echo 'Error: ' . $e->getMessage();
+}
+//}

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Response>
+    <Say voice="alice">Test call, please wait</Say>
+    <Dial>
+        <Number>+79771378997</Number>
+    </Dial>
+</Response>
